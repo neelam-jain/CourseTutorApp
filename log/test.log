@@ -1,0 +1,1149 @@
+  [1m[36m (0.1ms)[0m  [1m[0m
+  [1m[35m (0.6ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.7ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (0.0ms)[0m  
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:42:40 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"params"=>{"course"=>{"name"=>"Math", "tutors_attributes"=>[{"name"=>"John Doe", "email"=>"john@example.com"}, {"name"=>"Jane Doe", "email"=>"jane@example.com"}]}}}
+Completed 400 Bad Request in 5ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:42:40 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"params"=>{"course"=>{"name"=>nil}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 20:42:40 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 1.2ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (25.6ms)[0m  CREATE TABLE "courses" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (15.8ms)[0m  [1mCREATE TABLE "tutors" ("id" serial primary key, "name" character varying, "email" character varying, "course_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (8.3ms)[0m  CREATE  INDEX  "index_tutors_on_course_id" ON "tutors" USING btree ("course_id")
+  [1m[36m (4.6ms)[0m  [1mALTER TABLE "tutors" ADD CONSTRAINT "fk_rails_ecbf595870"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+[0m
+  [1m[35m (8.3ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying NOT NULL) 
+  [1m[36m (7.9ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.4ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (2.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20231129141213')[0m
+  [1m[35m (2.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20231129141207')
+  [1m[36m (10.0ms)[0m  [1mALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.9ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.9ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (38.3ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.9ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:48:28 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"params"=>{"course"=>{"name"=>"Math", "tutors_attributes"=>[{"name"=>"John Doe", "email"=>"john@example.com"}, {"name"=>"Jane Doe", "email"=>"jane@example.com"}]}}}
+Completed 400 Bad Request in 5ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:48:28 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"params"=>{"course"=>{"name"=>nil}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 15:18:28.066087"], ["updated_at", "2023-11-29 15:18:28.066087"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sample Course"], ["created_at", "2023-11-29 15:18:28.067716"], ["updated_at", "2023-11-29 15:18:28.067716"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 15:18:28.068794"], ["updated_at", "2023-11-29 15:18:28.068794"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 1], ["created_at", "2023-11-29 15:18:28.075865"], ["updated_at", "2023-11-29 15:18:28.075865"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 1], ["created_at", "2023-11-29 15:18:28.077530"], ["updated_at", "2023-11-29 15:18:28.077530"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:48:28 +0530
+Processing by Api::V1::CoursesController#index as HTML
+  [1m[35mCourse Load (0.3ms)[0m  SELECT "courses".* FROM "courses"
+No serializer found for resource: #<Course id: 1, name: "Sample Course", created_at: "2023-11-29 15:18:28", updated_at: "2023-11-29 15:18:28">
+[active_model_serializers]   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 1]]
+[active_model_serializers]   [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 2]]
+[active_model_serializers]   [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 3]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Course::ActiveRecord_Relation (10.75ms)
+Completed 200 OK in 17ms (Views: 16.2ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "History"], ["created_at", "2023-11-29 15:18:28.101360"], ["updated_at", "2023-11-29 15:18:28.101360"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Professor X"], ["email", "professor@example.com"], ["course_id", 4], ["created_at", "2023-11-29 15:18:28.102684"], ["updated_at", "2023-11-29 15:18:28.102684"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/courses/4" for 127.0.0.1 at 2023-11-29 20:48:28 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1  [["id", 4]]
+[active_model_serializers]   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 4]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.83ms)
+Completed 200 OK in 3ms (Views: 1.2ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 20:48:28 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[35mCourse Load (0.2ms)[0m  SELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1  [["id", 999]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36m (10.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (47.6ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.6ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:54:32 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"params"=>{"course"=>{"name"=>"Math", "tutors_attributes"=>[{"name"=>"John Doe", "email"=>"john@example.com"}, {"name"=>"Jane Doe", "email"=>"jane@example.com"}]}}}
+Completed 400 Bad Request in 6ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:54:32 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"params"=>{"course"=>{"name"=>nil}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 15:24:32.036593"], ["updated_at", "2023-11-29 15:24:32.036593"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sample Course"], ["created_at", "2023-11-29 15:24:32.037974"], ["updated_at", "2023-11-29 15:24:32.037974"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 15:24:32.038763"], ["updated_at", "2023-11-29 15:24:32.038763"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 1], ["created_at", "2023-11-29 15:24:32.044983"], ["updated_at", "2023-11-29 15:24:32.044983"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 1], ["created_at", "2023-11-29 15:24:32.046594"], ["updated_at", "2023-11-29 15:24:32.046594"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:54:32 +0530
+Processing by Api::V1::CoursesController#index as HTML
+  [1m[35mCourse Load (0.2ms)[0m  SELECT "courses".* FROM "courses"
+No serializer found for resource: #<Course id: 1, name: "Sample Course", created_at: "2023-11-29 15:24:32", updated_at: "2023-11-29 15:24:32">
+[active_model_serializers]   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 1]]
+[active_model_serializers]   [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 2]]
+[active_model_serializers]   [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 3]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Course::ActiveRecord_Relation (6.54ms)
+Completed 200 OK in 13ms (Views: 11.7ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "History"], ["created_at", "2023-11-29 15:24:32.065362"], ["updated_at", "2023-11-29 15:24:32.065362"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Professor X"], ["email", "professor@example.com"], ["course_id", 4], ["created_at", "2023-11-29 15:24:32.066574"], ["updated_at", "2023-11-29 15:24:32.066574"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/courses/4" for 127.0.0.1 at 2023-11-29 20:54:32 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mCourse Load (0.2ms)[0m  SELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1  [["id", 4]]
+[active_model_serializers]   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 4]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.91ms)
+Completed 200 OK in 4ms (Views: 1.3ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 20:54:32 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[35mCourse Load (0.3ms)[0m  SELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1  [["id", 999]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.3ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36m (10.3ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.9ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (45.7ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (3.0ms)[0m  [1mALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:54:48 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"params"=>{"course"=>{"name"=>"Math", "tutors_attributes"=>[{"name"=>"John Doe", "email"=>"john@example.com"}, {"name"=>"Jane Doe", "email"=>"jane@example.com"}]}}}
+Completed 400 Bad Request in 4ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:54:48 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"params"=>{"course"=>{"name"=>nil}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 15:24:48.657163"], ["updated_at", "2023-11-29 15:24:48.657163"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sample Course"], ["created_at", "2023-11-29 15:24:48.658795"], ["updated_at", "2023-11-29 15:24:48.658795"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 15:24:48.662617"], ["updated_at", "2023-11-29 15:24:48.662617"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 1], ["created_at", "2023-11-29 15:24:48.668591"], ["updated_at", "2023-11-29 15:24:48.668591"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 1], ["created_at", "2023-11-29 15:24:48.670168"], ["updated_at", "2023-11-29 15:24:48.670168"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:54:48 +0530
+Processing by Api::V1::CoursesController#index as HTML
+  [1m[35mCourse Load (0.3ms)[0m  SELECT "courses".* FROM "courses"
+No serializer found for resource: #<Course id: 1, name: "Sample Course", created_at: "2023-11-29 15:24:48", updated_at: "2023-11-29 15:24:48">
+[active_model_serializers]   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 1]]
+[active_model_serializers]   [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 2]]
+[active_model_serializers]   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 3]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Course::ActiveRecord_Relation (6.68ms)
+Completed 200 OK in 13ms (Views: 11.7ms | ActiveRecord: 0.9ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "History"], ["created_at", "2023-11-29 15:24:48.689172"], ["updated_at", "2023-11-29 15:24:48.689172"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Professor X"], ["email", "professor@example.com"], ["course_id", 4], ["created_at", "2023-11-29 15:24:48.690357"], ["updated_at", "2023-11-29 15:24:48.690357"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/courses/4" for 127.0.0.1 at 2023-11-29 20:54:48 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1  [["id", 4]]
+[active_model_serializers]   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 4]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.84ms)
+Completed 200 OK in 4ms (Views: 1.2ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 20:54:48 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[35mCourse Load (0.3ms)[0m  SELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1  [["id", 999]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.3ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36m (10.2ms)[0m  [1mALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.7ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (49.9ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.8ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 20:56:00 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"params"=>{"course"=>{"name"=>"Math", "tutors_attributes"=>[{"name"=>"John Doe", "email"=>"john@example.com"}, {"name"=>"Jane Doe", "email"=>"jane@example.com"}]}}}
+Completed 500 Internal Server Error in 91274ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.7ms)[0m  [1mROLLBACK[0m
+  [1m[36m (10.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (32.6ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.8ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:00:11 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>"Math", "tutors_attributes"=>[{"name"=>"John Doe", "email"=>"john@example.com"}, {"name"=>"Jane Doe", "email"=>"jane@example.com"}]}}
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Math"], ["created_at", "2023-11-29 15:30:11.209768"], ["updated_at", "2023-11-29 15:30:11.209768"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john@example.com"], ["course_id", 1], ["created_at", "2023-11-29 15:30:11.210976"], ["updated_at", "2023-11-29 15:30:11.210976"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Jane Doe"], ["email", "jane@example.com"], ["course_id", 1], ["created_at", "2023-11-29 15:30:11.211902"], ["updated_at", "2023-11-29 15:30:11.211902"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.12ms)
+Completed 201 Created in 28ms (Views: 4.2ms | ActiveRecord: 4.0ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "courses"
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:00:11 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"params"=>{"course"=>{"name"=>nil}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sample Course"], ["created_at", "2023-11-29 15:30:11.224655"], ["updated_at", "2023-11-29 15:30:11.224655"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 15:30:11.225574"], ["updated_at", "2023-11-29 15:30:11.225574"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sample Course"], ["created_at", "2023-11-29 15:30:11.226303"], ["updated_at", "2023-11-29 15:30:11.226303"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 2], ["created_at", "2023-11-29 15:30:11.228508"], ["updated_at", "2023-11-29 15:30:11.228508"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 2], ["created_at", "2023-11-29 15:30:11.229513"], ["updated_at", "2023-11-29 15:30:11.229513"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:00:11 +0530
+Processing by Api::V1::CoursesController#index as HTML
+  [1m[36mCourse Load (0.3ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+No serializer found for resource: #<Course id: 2, name: "Sample Course", created_at: "2023-11-29 15:30:11", updated_at: "2023-11-29 15:30:11">
+[active_model_serializers]   [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 2]]
+[active_model_serializers]   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 3]]
+[active_model_serializers]   [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 4]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Course::ActiveRecord_Relation (2.52ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.8ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "History"], ["created_at", "2023-11-29 15:30:11.240502"], ["updated_at", "2023-11-29 15:30:11.240502"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Professor X"], ["email", "professor@example.com"], ["course_id", 5], ["created_at", "2023-11-29 15:30:11.241815"], ["updated_at", "2023-11-29 15:30:11.241815"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/api/v1/courses/5" for 127.0.0.1 at 2023-11-29 21:00:11 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1[0m  [["id", 5]]
+[active_model_serializers]   [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 5]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.94ms)
+Completed 200 OK in 3ms (Views: 1.0ms | ActiveRecord: 0.3ms)
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 21:00:11 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mCourse Load (0.3ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1[0m  [["id", 999]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (10.0ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (30.0ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.8ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:00:46 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>"Math", "tutors_attributes"=>[{"name"=>"John Doe", "email"=>"john@example.com"}, {"name"=>"Jane Doe", "email"=>"jane@example.com"}]}}
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Math"], ["created_at", "2023-11-29 15:30:46.320336"], ["updated_at", "2023-11-29 15:30:46.320336"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john@example.com"], ["course_id", 1], ["created_at", "2023-11-29 15:30:46.321642"], ["updated_at", "2023-11-29 15:30:46.321642"]]
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Jane Doe"], ["email", "jane@example.com"], ["course_id", 1], ["created_at", "2023-11-29 15:30:46.322548"], ["updated_at", "2023-11-29 15:30:46.322548"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.12ms)
+Completed 201 Created in 27ms (Views: 4.2ms | ActiveRecord: 3.9ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "courses"
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:00:46 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>nil}}
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2023-11-29 15:30:46.333052"], ["updated_at", "2023-11-29 15:30:46.333052"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.07ms)
+Completed 201 Created in 2ms (Views: 0.3ms | ActiveRecord: 0.3ms)
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 15:30:46.346543"], ["updated_at", "2023-11-29 15:30:46.346543"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sample Course"], ["created_at", "2023-11-29 15:30:46.347537"], ["updated_at", "2023-11-29 15:30:46.347537"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 15:30:46.348357"], ["updated_at", "2023-11-29 15:30:46.348357"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 3], ["created_at", "2023-11-29 15:30:46.350429"], ["updated_at", "2023-11-29 15:30:46.350429"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 3], ["created_at", "2023-11-29 15:30:46.351421"], ["updated_at", "2023-11-29 15:30:46.351421"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:00:46 +0530
+Processing by Api::V1::CoursesController#index as HTML
+  [1m[35mCourse Load (0.2ms)[0m  SELECT "courses".* FROM "courses"
+No serializer found for resource: #<Course id: 3, name: "Sample Course", created_at: "2023-11-29 15:30:46", updated_at: "2023-11-29 15:30:46">
+[active_model_serializers]   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 3]]
+[active_model_serializers]   [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 4]]
+[active_model_serializers]   [1m[36mTutor Load (0.3ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 5]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Course::ActiveRecord_Relation (5.92ms)
+Completed 200 OK in 9ms (Views: 7.5ms | ActiveRecord: 0.9ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "History"], ["created_at", "2023-11-29 15:30:46.366228"], ["updated_at", "2023-11-29 15:30:46.366228"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Professor X"], ["email", "professor@example.com"], ["course_id", 6], ["created_at", "2023-11-29 15:30:46.367443"], ["updated_at", "2023-11-29 15:30:46.367443"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/courses/6" for 127.0.0.1 at 2023-11-29 21:00:46 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mCourse Load (0.2ms)[0m  SELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1  [["id", 6]]
+[active_model_serializers]   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 6]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.8ms)
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 21:00:46 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[35mCourse Load (0.2ms)[0m  SELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1  [["id", 999]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36m (10.8ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.9ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (31.9ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.8ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:05:22 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>nil}}
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "courses" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2023-11-29 15:35:22.116727"], ["updated_at", "2023-11-29 15:35:22.116727"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.13ms)
+Completed 201 Created in 15ms (Views: 4.2ms | ActiveRecord: 2.6ms)
+  [1m[35m (0.7ms)[0m  ROLLBACK
+  [1m[36m (10.4ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (34.3ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.9ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:07:44 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>nil}}
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "courses" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2023-11-29 15:37:44.284513"], ["updated_at", "2023-11-29 15:37:44.284513"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.13ms)
+Completed 201 Created in 16ms (Views: 4.3ms | ActiveRecord: 2.7ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "tutors"
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "courses"[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (10.3ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.0ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (1.2ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (30.6ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.7ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:08:15 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>nil}}
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "courses" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2023-11-29 15:38:15.930516"], ["updated_at", "2023-11-29 15:38:15.930516"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.12ms)
+Completed 201 Created in 16ms (Views: 4.2ms | ActiveRecord: 3.4ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (10.4ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.1ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (1.4ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (43.5ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (3.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:38:26 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>nil}}
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with ActiveModel::Errors (0.08ms)
+Completed 422 Unprocessable Entity in 16ms (Views: 3.7ms | ActiveRecord: 2.7ms)
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[36m (10.3ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.1ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.7ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (45.6ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.9ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:38:56 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>nil}}
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with ActiveModel::Errors (0.05ms)
+Completed 422 Unprocessable Entity in 15ms (Views: 3.2ms | ActiveRecord: 2.7ms)
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "courses"
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36m (2.6ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (1.0ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (32.5ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (3.0ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:39:01 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>"Math", "tutors_attributes"=>[{"name"=>"John Doe", "email"=>"john@example.com"}, {"name"=>"Jane Doe", "email"=>"jane@example.com"}]}}
+  [1m[36m (0.4ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Math"], ["created_at", "2023-11-29 16:09:01.984425"], ["updated_at", "2023-11-29 16:09:01.984425"]]
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john@example.com"], ["course_id", 1], ["created_at", "2023-11-29 16:09:01.986246"], ["updated_at", "2023-11-29 16:09:01.986246"]]
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Jane Doe"], ["email", "jane@example.com"], ["course_id", 1], ["created_at", "2023-11-29 16:09:01.987636"], ["updated_at", "2023-11-29 16:09:01.987636"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.12ms)
+Completed 201 Created in 28ms (Views: 4.4ms | ActiveRecord: 5.5ms)
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM "courses"
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:39:01 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>nil}}
+  [1m[35m (0.3ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with ActiveModel::Errors (0.04ms)
+Completed 422 Unprocessable Entity in 4ms (Views: 1.4ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM "tutors"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "courses"[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sample Course"], ["created_at", "2023-11-29 16:09:02.006632"], ["updated_at", "2023-11-29 16:09:02.006632"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 16:09:02.007927"], ["updated_at", "2023-11-29 16:09:02.007927"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sample Course"], ["created_at", "2023-11-29 16:09:02.008822"], ["updated_at", "2023-11-29 16:09:02.008822"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 2], ["created_at", "2023-11-29 16:09:02.011541"], ["updated_at", "2023-11-29 16:09:02.011541"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 2], ["created_at", "2023-11-29 16:09:02.012954"], ["updated_at", "2023-11-29 16:09:02.012954"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:39:02 +0530
+Processing by Api::V1::CoursesController#index as HTML
+  [1m[36mCourse Load (0.7ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+No serializer found for resource: #<Course id: 2, name: "Sample Course", created_at: "2023-11-29 16:09:02", updated_at: "2023-11-29 16:09:02">
+[active_model_serializers]   [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 2]]
+[active_model_serializers]   [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 3]]
+[active_model_serializers]   [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 4]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Course::ActiveRecord_Relation (2.96ms)
+Completed 200 OK in 6ms (Views: 4.8ms | ActiveRecord: 1.0ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "History"], ["created_at", "2023-11-29 16:09:02.026628"], ["updated_at", "2023-11-29 16:09:02.026628"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Professor X"], ["email", "professor@example.com"], ["course_id", 5], ["created_at", "2023-11-29 16:09:02.028448"], ["updated_at", "2023-11-29 16:09:02.028448"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/api/v1/courses/5" for 127.0.0.1 at 2023-11-29 21:39:02 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1[0m  [["id", 5]]
+[active_model_serializers]   [1m[35mTutor Load (0.3ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 5]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (1.07ms)
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.5ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 21:39:02 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mCourse Load (0.5ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1[0m  [["id", 999]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (10.3ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.2ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.7ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (35.5ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.8ms)[0m  [1mALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 21:39:40 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mCourse Load (0.3ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1[0m  [["id", 999]]
+Completed 404 Not Found in 11ms (ActiveRecord: 3.2ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (10.3ms)[0m  [1mALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.9ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.7ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (42.9ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (3.2ms)[0m  [1mALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 21:39:52 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mCourse Load (0.3ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1[0m  [["id", 999]]
+Completed 404 Not Found in 11ms (ActiveRecord: 2.9ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (10.4ms)[0m  [1mALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.0ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.7ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (31.3ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.8ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 21:40:05 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mCourse Load (0.3ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT 1[0m  [["id", 999]]
+Completed 404 Not Found in 10ms (ActiveRecord: 2.7ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (16.6ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.2ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (1.1ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (33.0ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (3.0ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 21:43:34 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mCourse Load (0.9ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE (999) LIMIT 1[0m
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (10.5ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.1ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.7ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (42.9ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.9ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 21:45:25 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mCourse Load (0.9ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE (999) LIMIT 1[0m
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (10.3ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.9ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (33.7ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (3.2ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 21:45:55 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mCourse Load (0.7ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE (999) LIMIT 1[0m
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.7ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (10.4ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.2ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (32.9ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.8ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/api/v1/courses/999" for 127.0.0.1 at 2023-11-29 21:46:35 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mCourse Load (1.1ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE (999) LIMIT 1[0m
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 1.1ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (10.1ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.1ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (33.8ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (3.2ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:46:47 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"99"}
+  [1m[36mCourse Load (0.7ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE (99) LIMIT 1[0m
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.7ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (10.6ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.1ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.9ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (31.5ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.9ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:48:17 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"99"}
+  [1m[36mCourse Load (0.7ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE (99) LIMIT 1[0m
+  [1m[35mCourse Load (1.2ms)[0m  SELECT  "courses".* FROM "courses" WHERE (99) LIMIT 1
+  [1m[36mCourse Load (1.1ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE (99) LIMIT 1[0m
+  [1m[35mCourse Load (1.1ms)[0m  SELECT  "courses".* FROM "courses" WHERE (99) LIMIT 1
+Completed 500 Internal Server Error in 125345ms (ActiveRecord: 4.1ms)
+  [1m[36m (0.8ms)[0m  [1mROLLBACK[0m
+  [1m[36m (10.4ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.2ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.9ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (35.5ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.7ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:51:51 +0530
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[36m (10.3ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.1ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.8ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (43.1ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.8ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:52:12 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"99"}
+  [1m[36mCourse Load (0.4ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE (99) LIMIT 1[0m
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (10.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.1ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.8ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (30.7ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (3.0ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:54:39 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"99"}
+  [1m[36mCourse Load (0.7ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE (99) LIMIT 1[0m
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.7ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (10.1ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.1ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (38.7ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.7ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:55:14 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"99"}
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1  ORDER BY "courses"."id" ASC LIMIT 1[0m  [["id", 99]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 14ms (Views: 3.3ms | ActiveRecord: 2.5ms)
+  [1m[35m (0.4ms)[0m  ROLLBACK
+  [1m[36m (10.4ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (30.7ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.6ms)[0m  [1mALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:55:36 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"99"}
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1  ORDER BY "courses"."id" ASC LIMIT 1[0m  [["id", 99]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.07ms)
+Completed 200 OK in 19ms (Views: 10.2ms | ActiveRecord: 1.6ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (10.1ms)[0m  [1mALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.0ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.7ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (42.3ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.8ms)[0m  [1mALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:55:54 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"99"}
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1  ORDER BY "courses"."id" ASC LIMIT 1[0m  [["id", 99]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.05ms)
+Completed 200 OK in 17ms (Views: 4.7ms | ActiveRecord: 1.9ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (10.1ms)[0m  [1mALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.9ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.7ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (38.6ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.8ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:56:09 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"99"}
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1  ORDER BY "courses"."id" ASC LIMIT 1[0m  [["id", 99]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 14ms (Views: 3.4ms | ActiveRecord: 2.8ms)
+  [1m[35m (0.4ms)[0m  ROLLBACK
+  [1m[36m (10.3ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.9ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (0.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (31.8ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.9ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:56:36 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"99"}
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1  ORDER BY "courses"."id" ASC LIMIT 1[0m  [["id", 99]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.05ms)
+Completed 404 Not Found in 15ms (Views: 4.6ms | ActiveRecord: 2.5ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (10.5ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.5ms)[0m            SELECT schemaname || '.' || tablename
+          FROM pg_tables
+          WHERE
+            tablename !~ '_prt_' AND
+            tablename <> 'schema_migrations' AND
+            schemaname = ANY (current_schemas(false))
+
+  [1m[36m (1.0ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'course_and_tutor_test'[0m
+  [1m[35m (37.7ms)[0m  TRUNCATE TABLE "public"."courses", "public"."tutors" RESTART IDENTITY CASCADE;
+  [1m[36m (2.9ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:56:40 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>"Math", "tutors_attributes"=>[{"name"=>"John Doe", "email"=>"john@example.com"}, {"name"=>"Jane Doe", "email"=>"jane@example.com"}]}}
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Math"], ["created_at", "2023-11-29 16:26:40.355955"], ["updated_at", "2023-11-29 16:26:40.355955"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john@example.com"], ["course_id", 1], ["created_at", "2023-11-29 16:26:40.357028"], ["updated_at", "2023-11-29 16:26:40.357028"]]
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Jane Doe"], ["email", "jane@example.com"], ["course_id", 1], ["created_at", "2023-11-29 16:26:40.357892"], ["updated_at", "2023-11-29 16:26:40.357892"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.14ms)
+Completed 201 Created in 27ms (Views: 7.5ms | ActiveRecord: 2.8ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "courses"
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+Started POST "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:56:40 +0530
+Processing by Api::V1::CoursesController#create as HTML
+  Parameters: {"course"=>{"name"=>nil}}
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with ActiveModel::Errors (0.04ms)
+Completed 422 Unprocessable Entity in 4ms (Views: 1.3ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "tutors"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "courses"[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sample Course"], ["created_at", "2023-11-29 16:26:40.378023"], ["updated_at", "2023-11-29 16:26:40.378023"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sample Course"], ["created_at", "2023-11-29 16:26:40.379172"], ["updated_at", "2023-11-29 16:26:40.379172"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sample Course"], ["created_at", "2023-11-29 16:26:40.380063"], ["updated_at", "2023-11-29 16:26:40.380063"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 2], ["created_at", "2023-11-29 16:26:40.382281"], ["updated_at", "2023-11-29 16:26:40.382281"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Doe"], ["email", "john.doe@example.com"], ["course_id", 2], ["created_at", "2023-11-29 16:26:40.383456"], ["updated_at", "2023-11-29 16:26:40.383456"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/api/v1/courses" for 127.0.0.1 at 2023-11-29 21:56:40 +0530
+Processing by Api::V1::CoursesController#index as HTML
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+No serializer found for resource: #<Course id: 2, name: "Sample Course", created_at: "2023-11-29 16:26:40", updated_at: "2023-11-29 16:26:40">
+[active_model_serializers]   [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 2]]
+[active_model_serializers]   [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1[0m  [["course_id", 3]]
+[active_model_serializers]   [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 4]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Course::ActiveRecord_Relation (2.51ms)
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.5ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "History"], ["created_at", "2023-11-29 16:26:40.394594"], ["updated_at", "2023-11-29 16:26:40.394594"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tutors" ("name", "email", "course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Professor X"], ["email", "professor@example.com"], ["course_id", 5], ["created_at", "2023-11-29 16:26:40.395980"], ["updated_at", "2023-11-29 16:26:40.395980"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/api/v1/courses/5" for 127.0.0.1 at 2023-11-29 21:56:40 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1  ORDER BY "courses"."id" ASC LIMIT 1[0m  [["id", 5]]
+[active_model_serializers]   [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" WHERE "tutors"."course_id" = $1  [["course_id", 5]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Course (0.87ms)
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.3ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+Started GET "/api/v1/courses/99" for 127.0.0.1 at 2023-11-29 21:56:40 +0530
+Processing by Api::V1::CoursesController#show as HTML
+  Parameters: {"id"=>"99"}
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1  ORDER BY "courses"."id" ASC LIMIT 1[0m  [["id", 99]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.04ms)
+Completed 404 Not Found in 3ms (Views: 2.4ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
